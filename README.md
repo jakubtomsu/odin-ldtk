@@ -6,11 +6,12 @@ with a strong focus on user-friendliness.
 
 Current version: `1.3.3`
 
-The data definitions were generated with [QuickType](https://ldtk.io/docs/game-dev/loading/?menu=1#2-the-quicktype-way) for rust and then manually edited.
+The data definitions were generated with [JSON scheme and QuickType](https://ldtk.io/docs/game-dev/loading/?menu=1#2-the-quicktype-way) for rust and then manually edited.
 
 ## How to use
+Put the `ldtk.odin` file to a `ldtk` folder somewhere in your project. Then you can just do this (the path might be different):
 ```odin
-import "ldtk"
+import "../ldtk"
 ```
 And then:
 ```odin
