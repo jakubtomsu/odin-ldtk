@@ -143,14 +143,14 @@ Project :: struct {
 // containing exactly what is described below.
 Level :: struct {
     // Position informations of the background image, if there is one.
-    bg_pos:              Maybe(Level_Background_Position) `json:"_bgPos"`,
+    bg_pos:              Maybe(Level_Background_Position) `json:"__bgPos"`,
     // An array listing all other levels touching this one on the world map.  Only relevant
     // for world layouts where level spatial positioning is manual (ie. GridVania, Free). For
     // Horizontal and Vertical layouts, this array is always empty.
-    neighbours:          []Neighbour_Level `json:"_neighbours"`,
+    neighbours:          []Neighbour_Level `json:"__neighbours"`,
     // The "guessed" color for this level in the editor, decided using either the background
     // color or an existing custom field.
-    smart_color:         string `json:"_smartColor"`,
+    smart_color:         string `json:"__smartColor"`,
     // Background color of the level. If `nil`, the project `defaultLevelBgColor` should be
     // used.
     bg_color:            Maybe(string) `json:"bgColor"`,
@@ -159,7 +159,7 @@ Level :: struct {
     // Background image Y pivot (0-1)
     bg_pivot_y:          f32 `json:"bgPivotY"`,
     // An enum defining the way the background image (if any) is positioned on the level. See
-    // `_bgPos` for resulting position info. Possible values: &lt;`nil`&gt;, `Unscaled`,
+    // `__bgPos` for resulting position info. Possible values: &lt;`nil`&gt;, `Unscaled`,
     // `Contain`, `Cover`, `CoverDirty`
     bg_pos_type:         Maybe(Bg_Pos) `json:"bgPos"`,
     // The *optional* relative path to the level background image.
@@ -205,7 +205,7 @@ Level :: struct {
 // the `defs` section, as it contains data that are mostly important to the editor. To keep
 // you away from the `defs` section and avoid some unnecessary JSON parsing, important data
 // from definitions is often duplicated in fields prefixed with a double underscore (eg.
-// `_identifier` or `_type`).  The 2 only definition types you might need here are
+// `__identifier` or `__type`).  The 2 only definition types you might need here are
 // **Tilesets** and **Enums**.
 //
 // A structure containing all the definitions of this project
@@ -331,10 +331,10 @@ Layer_Definition :: struct {
     parallax_factor_y:         f32 `json:"parallaxFactorY"`,
     // If true (default), a layer with a parallax factor will also be scaled up/down accordingly.
     parallax_scaling:          bool `json:"parallaxScaling"`,
-    // X offset of the layer, in pixels (IMPORTANT: this should be added to the `Layer_Instance`
+    // X offset of the layer, in pixels (IMPORTANT: this should be added to the `LayerInstance`
     // optional offset)
     px_offset_x:               i32 `json:"pxOffsetX"`,
-    // Y offset of the layer, in pixels (IMPORTANT: this should be added to the `Layer_Instance`
+    // Y offset of the layer, in pixels (IMPORTANT: this should be added to the `LayerInstance`
     // optional offset)
     px_offset_y:               i32 `json:"pxOffsetY"`,
     // An array of tags to filter Entities that can be added to this layer
@@ -347,7 +347,7 @@ Layer_Definition :: struct {
     tile_pivot_y:              f32 `json:"tilePivotY"`,
     // Reference to the default Tileset UID being used by this layer definition.
     // **WARNING**: some layer *instances* might use a different tileset. So most of the time,
-    // you should probably use the `_tilesetDefUid` value found in layer instances.  Note:
+    // you should probably use the `__tilesetDefUid` value found in layer instances.  Note:
     // since version 1.0.0, the old `autoTilesetDefUid` was removed and merged into this value.
     tileset_def_uid:           Maybe(i32) `json:"tilesetDefUid"`,
     // Unique Int identifier
@@ -428,9 +428,9 @@ Int_Grid_Value_Definition :: struct {
 // one definition section, that would be the one.
 Tileset_Definition :: struct {
     // Grid-based height
-    c_height:             i32 `json:"_cHei"`,
+    c_height:             i32 `json:"__cHei"`,
     // Grid-based width
-    c_width:              i32 `json:"_cWid"`,
+    c_width:              i32 `json:"__cWid"`,
     // An array of custom tile metadata
     custom_data:          []Tile_Custom_Metadata `json:"customData"`,
     // If this value is set, then it means that this atlas uses an internal LDtk atlas image
@@ -476,19 +476,19 @@ Enum_Tag_Value :: struct {
 
 Entity_Instance :: struct {
     // Grid-based coordinates (`[x,y]` format)
-    grid:            [2]i32 `json:"_grid"`,
+    grid:            [2]i32 `json:"__grid"`,
     // Entity definition identifier
-    identifier:      string `json:"_identifier"`,
+    identifier:      string `json:"__identifier"`,
     // Pivot coordinates  (`[x,y]` format, values are from 0 to 1) of the Entity
-    pivot:           [2]f32 `json:"_pivot"`,
+    pivot:           [2]f32 `json:"__pivot"`,
     // The entity "smart" color, guessed from either Entity definition, or one its field
     // instances.
-    smart_color:     string `json:"_smartColor"`,
+    smart_color:     string `json:"__smartColor"`,
     // Array of tags defined in this Entity definition
-    tags:            []string `json:"_tags"`,
+    tags:            []string `json:"__tags"`,
     // Optional TilesetRect used to display this entity (it could either be the default Entity
     // tile, or some tile provided by a field value, like an Enum).
-    tile:            Maybe(Tileset_Rectangle) `json:"_tile"`,
+    tile:            Maybe(Tileset_Rectangle) `json:"__tile"`,
     // Reference of the **Entity definition** UID
     def_uid:         i32 `json:"defUid"`,
     // An array of all custom fields and their values.
@@ -508,15 +508,15 @@ Entity_Instance :: struct {
 
 Field_Instance :: struct {
     // Field definition identifier
-    identifier: string `json:"_identifier"`,
+    identifier: string `json:"__identifier"`,
     // Optional TilesetRect used to display this field (this can be the field own Tile, or some
     // other Tile guessed from the value, like an Enum).
-    tile:       Maybe(Tileset_Rectangle) `json:"_tile"`,
+    tile:       Maybe(Tileset_Rectangle) `json:"__tile"`,
     // Type of the field, such as `Int`, `Float`, `string`, `Enum(my_enum_name)`, `Bool`,
     // etc.  NOTE: if you enable the advanced option **Use Multilines type**, you will have
     // "*Multilines*" instead of "*string*" when relevant.
-    type:       string `json:"_type"`,
-    // Actual value of the field instance. The value type varies, depending on `_type`:
+    type:       string `json:"__type"`,
+    // Actual value of the field instance. The value type varies, depending on `__type`:
     // - For **classic types** (ie. Integer, Float, Boolean, string, Text and FilePath), you
     // just get the actual value with the expected type.   - For **Color**, the value is an
     // hexadecimal string using "#rrggbb" format.   - For **Enum**, the value is a string
@@ -524,8 +524,8 @@ Field_Instance :: struct {
     // [GridPoint](#ldtk-GridPoint) object.   - For **Tile**, the value is a
     // [TilesetRect](#ldtk-TilesetRect) object.   - For **EntityRef**, the value is an
     // [EntityReferenceInfos](#ldtk-EntityReferenceInfos) object.  If the field is an
-    // array, then this `_value` will also be a JSON array.
-    value:      json.Value `json:"_value"`,
+    // array, then this `__value` will also be a JSON array.
+    value:      json.Value `json:"__value"`,
     // Reference of the **Field definition** UID
     def_uid:    i32 `json:"defUid"`,
     // Editor internal raw values
@@ -536,7 +536,7 @@ Field_Instance :: struct {
 Entity_Reference_Infos :: struct {
     // IID of the refered EntityInstance
     entity_iid: string `json:"entityIid"`,
-    // IID of the Layer_Instance containing the refered EntityInstance
+    // IID of the LayerInstance containing the refered EntityInstance
     layer_iid:  string `json:"layerIid"`,
     // IID of the Level containing the refered EntityInstance
     level_iid:  string `json:"levelIid"`,
@@ -563,25 +563,25 @@ Int_Grid_Value_Instance :: struct {
 
 Layer_Instance :: struct {
     // Grid-based height
-    c_height:             i32 `json:"_cHei"`,
+    c_height:             i32 `json:"__cHei"`,
     // Grid-based width
-    c_width:              i32 `json:"_cWid"`,
+    c_width:              i32 `json:"__cWid"`,
     // Grid size
-    grid_size:            i32 `json:"_gridSize"`,
+    grid_size:            i32 `json:"__gridSize"`,
     // Layer definition identifier
-    identifier:           string `json:"_identifier"`,
+    identifier:           string `json:"__identifier"`,
     // Layer opacity as Float [0-1]
-    opacity:              f32 `json:"_opacity"`,
+    opacity:              f32 `json:"__opacity"`,
     // Total layer X pixel offset, including both instance and definition offsets.
-    px_total_offset_x:    i32 `json:"_pxTotalOffsetX"`,
+    px_total_offset_x:    i32 `json:"__pxTotalOffsetX"`,
     // Total layer Y pixel offset, including both instance and definition offsets.
-    px_total_offset_y:    i32 `json:"_pxTotalOffsetY"`,
+    px_total_offset_y:    i32 `json:"__pxTotalOffsetY"`,
     // The definition UID of corresponding Tileset, if any.
-    tileset_def_uid:      Maybe(i32) `json:"_tilesetDefUid"`,
+    tileset_def_uid:      Maybe(i32) `json:"__tilesetDefUid"`,
     // The relative path to corresponding Tileset, if any.
-    tileset_rel_path:     Maybe(string) `json:"_tilesetRelPath"`,
+    tileset_rel_path:     Maybe(string) `json:"__tilesetRelPath"`,
     // Layer type (possible values: IntGrid, Entities, Tiles or AutoLayer)
-    type:                 Layer_Type `json:"_type"`,
+    type:                 Layer_Type `json:"__type"`,
     // An array containing all tiles generated by Auto-layer rules. The array is already sorted
     // in display order (ie. 1st tile is beneath 2nd, which is beneath 3rd etc.).
     // Note: if multiple tiles are stacked in the same cell as the result of different rules,
@@ -597,7 +597,7 @@ Layer_Instance :: struct {
     // A list of all values in the IntGrid layer, stored in CSV format (Comma Separated
     // Values).  Order is from left to right, and top to bottom (ie. first row from left to
     // right, followed by second row, etc).  `0` means "empty cell" and IntGrid values
-    // start at 1.  The array size is `_cWid` x `_cHei` cells.
+    // start at 1.  The array size is `__cWid` x `__cHei` cells.
     int_grid_csv:         []i32 `json:"intGridCsv"`,
     // Reference the Layer definition UID
     layer_def_uid:        i32 `json:"layerDefUid"`,
@@ -609,11 +609,11 @@ Layer_Instance :: struct {
     // This layer can use another tileset by overriding the tileset UID here.
     override_tileset_uid: Maybe(i32) `json:"overrideTilesetUid"`,
     // X offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
-    // the `LayerDef` optional offset, so you should probably prefer using `_pxTotalOffsetX`
+    // the `LayerDef` optional offset, so you should probably prefer using `__pxTotalOffsetX`
     // which contains the total offset value)
     px_offset_x:          i32 `json:"pxOffsetX"`,
     // Y offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
-    // the `LayerDef` optional offset, so you should probably prefer using `_pxTotalOffsetX`
+    // the `LayerDef` optional offset, so you should probably prefer using `__pxTotalOffsetX`
     // which contains the total offset value)
     px_offset_y:          i32 `json:"pxOffsetY"`,
     // Random seed used for Auto-Layers rendering
@@ -681,7 +681,7 @@ Field_Definition :: struct {
     // field will look like `Array<...>` (eg. `Array<Int>`, `Array<Point>` etc.)  NOTE: if
     // you enable the advanced option **Use Multilines type**, you will have "*Multilines*"
     // instead of "*string*" when relevant.
-    type_string:            string `json:"_type"`,
+    type_string:            string `json:"__type"`,
     // Optional list of accepted file extensions for FilePath value type. Includes the dot:
     // `.ext`
     accept_file_types:      Maybe([]string) `json:"acceptFileTypes"`,
@@ -779,7 +779,7 @@ Enum_Definition :: struct {
 Enum_Value_Definition :: struct {
     // An array of 4 Int values that refers to the tile in the tileset image: `[ x, y, width,
     // height ]`
-    tile_src_rect: Maybe([4]i32) `json:"_tileSrcRect"`,
+    tile_src_rect: Maybe([4]i32) `json:"__tileSrcRect"`,
     // Optional color
     color:         i32 `json:"color"`,
     // Enum value
