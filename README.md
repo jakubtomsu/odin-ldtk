@@ -11,7 +11,7 @@ import "ldtk"
 ```
 And then:
 ```odin
-if project, ok := ldtk.load_from_file("foo.ldtk, context.temp_allocator).?; ok {
+if project, ok := ldtk.load_from_file("foo.ldtk", context.temp_allocator).?; ok {
     // use project ...
 }
 ```
