@@ -32,7 +32,7 @@ Project :: struct {
     // anonymous.
     app_build_id:           f32 `json:"appBuildId"`,
     // Number of backup files to keep, if the `backupOnSave` is TRUE
-    backup_limit:           i32 `json:"backupLimit"`,
+    backup_limit:           int `json:"backupLimit"`,
     // If TRUE, an extra copy of the project will be created in a sub folder, when saving.
     backup_on_save:         bool `json:"backupOnSave"`,
     // Project background color
@@ -40,17 +40,17 @@ Project :: struct {
     // An array of command lines that can be ran manually by the user
     custom_commands:        []Custom_Command `json:"customCommands"`,
     // Default grid size for new layers
-    default_grid_size:      i32 `json:"defaultGridSize"`,
+    default_grid_size:      int `json:"defaultGridSize"`,
     // Default background color of levels
     default_level_bg_color: string `json:"defaultLevelBgColor"`,
     // **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
     // It will then be `nil`. You can enable the Multi-worlds advanced project option to enable
     // the change immediately.  Default new level height
-    default_level_height:   Maybe(i32) `json:"defaultLevelHeight"`,
+    default_level_height:   Maybe(int) `json:"defaultLevelHeight"`,
     // **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
     // It will then be `nil`. You can enable the Multi-worlds advanced project option to enable
     // the change immediately.  Default new level width
-    default_level_width:    Maybe(i32) `json:"defaultLevelWidth"`,
+    default_level_width:    Maybe(int) `json:"defaultLevelWidth"`,
     // Default X pivot (0 to 1) for new entities
     default_pivot_x:        f32 `json:"defaultPivotX"`,
     // Default Y pivot (0 to 1) for new entities
@@ -92,7 +92,7 @@ Project :: struct {
     // FALSE)
     minify_json:            bool `json:"minifyJson"`,
     // Next Unique integer ID available
-    next_uid:               i32 `json:"nextUid"`,
+    next_uid:               int `json:"nextUid"`,
     // File naming pattern for exported PNGs
     png_file_pattern:       Maybe(string) `json:"pngFilePattern"`,
     // If TRUE, a very simplified will be generated on saving, for quicker & easier engine
@@ -107,11 +107,11 @@ Project :: struct {
     // **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
     // It will then be `nil`. You can enable the Multi-worlds advanced project option to enable
     // the change immediately.  Height of the world grid in pixels.
-    world_grid_height:      Maybe(i32) `json:"worldGridHeight"`,
+    world_grid_height:      Maybe(int) `json:"worldGridHeight"`,
     // **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
     // It will then be `nil`. You can enable the Multi-worlds advanced project option to enable
     // the change immediately.  Width of the world grid in pixels.
-    world_grid_width:       Maybe(i32) `json:"worldGridWidth"`,
+    world_grid_width:       Maybe(int) `json:"worldGridWidth"`,
     // **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
     // It will then be `nil`. You can enable the Multi-worlds advanced project option to enable
     // the change immediately.  An enum that describes how levels are organized in
@@ -176,13 +176,13 @@ Level :: struct {
     // An array containing all Layer instances. **IMPORTANT**: if the project option "*Save
     // levels separately*" is enabled, this field will be `nil`.  This array is **sorted
     // in display order**: the 1st layer is the top-most and the last is behind.
-    layer_instances:     Maybe([]Layer_Instance) `json:"layerInstances"`,
+    layer_instances:     []Layer_Instance `json:"layerInstances"`,
     // Height of the level in pixels
-    px_height:           i32 `json:"pxHei"`,
+    px_height:           int `json:"pxHei"`,
     // Width of the level in pixels
-    px_width:            i32 `json:"pxWid"`,
+    px_width:            int `json:"pxWid"`,
     // Unique Int identifier
-    uid:                 i32 `json:"uid"`,
+    uid:                 int `json:"uid"`,
     // If TRUE, the level identifier will always automatically use the naming pattern as defined
     // in `Project.levelNamePattern`. Becomes FALSE if the identifier is manually modified by
     // user.
@@ -190,15 +190,15 @@ Level :: struct {
     // Index that represents the "depth" of the level in the world. Default is 0, greater means
     // "above", lower means "below".  This value is mostly used for display only and is
     // intended to make stacking of levels easier to manage.
-    world_depth:         i32 `json:"worldDepth"`,
+    world_depth:         int `json:"worldDepth"`,
     // World X coordinate in pixels.  Only relevant for world layouts where level spatial
     // positioning is manual (ie. GridVania, Free). For Horizontal and Vertical layouts, the
     // value is always -1 here.
-    world_x:             i32 `json:"worldX"`,
+    world_x:             int `json:"worldX"`,
     // World Y coordinate in pixels.  Only relevant for world layouts where level spatial
     // positioning is manual (ie. GridVania, Free). For Horizontal and Vertical layouts, the
     // value is always -1 here.
-    world_y:             i32 `json:"worldY"`,
+    world_y:             int `json:"worldY"`,
 }
 
 // If you're writing your own LDtk importer, you should probably just ignore *most* stuff in
@@ -238,7 +238,7 @@ Entity_Definition :: struct {
     field_defs:         []Field_Definition `json:"fieldDefs"`,
     fill_opacity:       f32 `json:"fillOpacity"`,
     // Pixel height
-    height:             i32 `json:"height"`,
+    height:             int `json:"height"`,
     hollow:             bool `json:"hollow"`,
     // User defined unique identifier
     identifier:         string `json:"identifier"`,
@@ -252,11 +252,11 @@ Entity_Definition :: struct {
     limit_scope:        Limit_Scope `json:"limitScope"`,
     line_opacity:       f32 `json:"lineOpacity"`,
     // Max instances count
-    max_count:          i32 `json:"maxCount"`,
+    max_count:          int `json:"maxCount"`,
     // An array of 4 dimensions for the up/right/down/left borders (in this order) when using
     // 9-slice mode for `tileRenderMode`.  If the tileRenderMode is not NineSlice, then
     // this array is empty.  See: https://en.wikipedia.org/wiki/9-slice_scaling
-    nine_slice_borders: []i32 `json:"nineSliceBorders"`,
+    nine_slice_borders: []int `json:"nineSliceBorders"`,
     // Pivot X coordinate (from 0 to 1.0)
     pivot_x:            f32 `json:"pivotX"`,
     // Pivot Y coordinate (from 0 to 1.0)
@@ -273,7 +273,7 @@ Entity_Definition :: struct {
     tags:               []string `json:"tags"`,
     // **WARNING**: this deprecated value is no longer exported since version 1.2.0  Replaced
     // by: `tileRect`
-    tile_id:            Maybe(i32) `json:"tileId"`,
+    tile_id:            Maybe(int) `json:"tileId"`,
     tile_opacity:       f32 `json:"tileOpacity"`,
     // An object representing a rectangle from an existing Tileset
     tile_rect:          Maybe(Tileset_Rectangle) `json:"tileRect"`,
@@ -282,11 +282,11 @@ Entity_Definition :: struct {
     // `FullSizeUncropped`, `NineSlice`
     tile_render_mode:   Tile_Render_Mode `json:"tileRenderMode"`,
     // Tileset ID used for optional tile display
-    tileset_id:         Maybe(i32) `json:"tilesetId"`,
+    tileset_id:         Maybe(int) `json:"tilesetId"`,
     // Unique Int identifier
-    uid:                i32 `json:"uid"`,
+    uid:                int `json:"uid"`,
     // Pixel width
-    width:              i32 `json:"width"`,
+    width:              int `json:"width"`,
 }
 
 Layer_Definition :: struct {
@@ -294,10 +294,10 @@ Layer_Definition :: struct {
     type:                      Type `json:"type"`,
     // Contains all the auto-layer rule definitions.
     auto_rule_groups:          []Auto_Layer_Rule_Group `json:"autoRuleGroups"`,
-    auto_source_layer_def_uid: Maybe(i32) `json:"autoSourceLayerDefUid"`,
+    auto_source_layer_def_uid: Maybe(int) `json:"autoSourceLayerDefUid"`,
     // **WARNING**: this deprecated value is no longer exported since version 1.2.0  Replaced
     // by: `tilesetDefUid`
-    auto_tileset_def_uid:      Maybe(i32) `json:"autoTilesetDefUid"`,
+    auto_tileset_def_uid:      Maybe(int) `json:"autoTilesetDefUid"`,
     // Allow editor selections when the layer is not currently active.
     can_select_when_inactive:  bool `json:"canSelectWhenInactive"`,
     // Opacity of the layer (0 to 1.0)
@@ -307,11 +307,11 @@ Layer_Definition :: struct {
     // An array of tags to forbid some Entities in this layer
     excluded_tags:             []string `json:"excludedTags"`,
     // Width and height of the grid in pixels
-    grid_size:                 i32 `json:"gridSize"`,
+    grid_size:                 int `json:"gridSize"`,
     // Height of the optional "guide" grid in pixels
-    guide_grid_height:         i32 `json:"guideGridHei"`,
+    guide_grid_height:         int `json:"guideGridHei"`,
     // Width of the optional "guide" grid in pixels
-    guide_grid_width:          i32 `json:"guideGridWid"`,
+    guide_grid_width:          int `json:"guideGridWid"`,
     hide_fields_when_inactive: bool `json:"hideFieldsWhenInactive"`,
     // Hide the layer from the list on the side of the editor view.
     hide_in_list:              bool `json:"hideInList"`,
@@ -333,10 +333,10 @@ Layer_Definition :: struct {
     parallax_scaling:          bool `json:"parallaxScaling"`,
     // X offset of the layer, in pixels (IMPORTANT: this should be added to the `LayerInstance`
     // optional offset)
-    px_offset_x:               i32 `json:"pxOffsetX"`,
+    px_offset_x:               int `json:"pxOffsetX"`,
     // Y offset of the layer, in pixels (IMPORTANT: this should be added to the `LayerInstance`
     // optional offset)
-    px_offset_y:               i32 `json:"pxOffsetY"`,
+    px_offset_y:               int `json:"pxOffsetY"`,
     // An array of tags to filter Entities that can be added to this layer
     required_tags:             []string `json:"requiredTags"`,
     // If the tiles are smaller or larger than the layer grid, the pivot value will be used to
@@ -349,9 +349,9 @@ Layer_Definition :: struct {
     // **WARNING**: some layer *instances* might use a different tileset. So most of the time,
     // you should probably use the `__tilesetDefUid` value found in layer instances.  Note:
     // since version 1.0.0, the old `autoTilesetDefUid` was removed and merged into this value.
-    tileset_def_uid:           Maybe(i32) `json:"tilesetDefUid"`,
+    tileset_def_uid:           Maybe(int) `json:"tilesetDefUid"`,
     // Unique Int identifier
-    uid:                       i32 `json:"uid"`,
+    uid:                       int `json:"uid"`,
 }
 
 
@@ -362,7 +362,7 @@ Auto_Layer_Rule_Group :: struct {
     is_optional: bool `json:"isOptional"`,
     name:        string `json:"name"`,
     rules:       []Auto_Layer_Rule_Definition `json:"rules"`,
-    uid:         i32 `json:"uid"`,
+    uid:         int `json:"uid"`,
     uses_wizard: bool `json:"usesWizard"`,
 }
 
@@ -384,9 +384,9 @@ Auto_Layer_Rule_Definition :: struct {
     // If TRUE, allow rule to be matched by flipping its pattern vertically
     flip_y:              bool `json:"flipY"`,
     // Default IntGrid value when checking cells outside of level bounds
-    out_of_bounds_value: Maybe(i32) `json:"outOfBoundsValue"`,
+    out_of_bounds_value: Maybe(int) `json:"outOfBoundsValue"`,
     // Rule pattern (size x size)
-    pattern:             []i32 `json:"pattern"`,
+    pattern:             []int `json:"pattern"`,
     // If TRUE, enable Perlin filtering to only apply rule on specific random area
     perlin_active:       bool `json:"perlinActive"`,
     perlin_octaves:      f32 `json:"perlinOctaves"`,
@@ -397,21 +397,21 @@ Auto_Layer_Rule_Definition :: struct {
     // Y pivot of a tile stamp (0-1)
     pivot_y:             f32 `json:"pivotY"`,
     // Pattern width & height. Should only be 1,3,5 or 7.
-    size:                i32 `json:"size"`,
+    size:                int `json:"size"`,
     // Array of all the tile IDs. They are used randomly or as stamps, based on `tileMode` value.
-    tile_ids:            []i32 `json:"tileIds"`,
+    tile_ids:            []int `json:"tileIds"`,
     // Defines how tileIds array is used Possible values: `Single`, `Stamp`
     tile_mode:           Tile_Mode `json:"tileMode"`,
     // Unique Int identifier
-    uid:                 i32 `json:"uid"`,
+    uid:                 int `json:"uid"`,
     // X cell coord modulo
-    x_modulo:            i32 `json:"xModulo"`,
+    x_modulo:            int `json:"xModulo"`,
     // X cell start offset
-    x_offset:            i32 `json:"xOffset"`,
+    x_offset:            int `json:"xOffset"`,
     // Y cell coord modulo
-    y_modulo:            i32 `json:"yModulo"`,
+    y_modulo:            int `json:"yModulo"`,
     // Y cell start offset
-    y_offset:            i32 `json:"yOffset"`,
+    y_offset:            int `json:"yOffset"`,
 }
 
 // IntGrid value definition
@@ -420,7 +420,7 @@ Int_Grid_Value_Definition :: struct {
     // User defined unique identifier
     identifier: Maybe(string) `json:"identifier"`,
     // The IntGrid value itself
-    value:      i32 `json:"value"`,
+    value:      int `json:"value"`,
 }
 
 // The `Tileset` definition is the most important part among project definitions. It
@@ -428,9 +428,9 @@ Int_Grid_Value_Definition :: struct {
 // one definition section, that would be the one.
 Tileset_Definition :: struct {
     // Grid-based height
-    c_height:             i32 `json:"__cHei"`,
+    c_height:             int `json:"__cHei"`,
     // Grid-based width
-    c_width:              i32 `json:"__cWid"`,
+    c_width:              int `json:"__cWid"`,
     // An array of custom tile metadata
     custom_data:          []Tile_Custom_Metadata `json:"customData"`,
     // If this value is set, then it means that this atlas uses an internal LDtk atlas image
@@ -442,41 +442,41 @@ Tileset_Definition :: struct {
     // User defined unique identifier
     identifier:           string `json:"identifier"`,
     // Distance in pixels from image borders
-    padding:              i32 `json:"padding"`,
+    padding:              int `json:"padding"`,
     // Image height in pixels
-    px_height:            i32 `json:"pxHei"`,
+    px_height:            int `json:"pxHei"`,
     // Image width in pixels
-    px_width:             i32 `json:"pxWid"`,
+    px_width:             int `json:"pxWid"`,
     // Path to the source file, relative to the current project JSON file  It can be nil
     // if no image was provided, or when using an embed atlas.
     rel_path:             Maybe(string) `json:"relPath"`,
 
     // Space in pixels between all tiles
-    spacing:              i32 `json:"spacing"`,
+    spacing:              int `json:"spacing"`,
     // An array of user-defined tags to organize the Tilesets
     tags:                 []string `json:"tags"`,
     // Optional Enum definition UID used for this tileset meta-data
-    tags_source_enum_uid: Maybe(i32) `json:"tagsSourceEnumUid"`,
-    tile_grid_size:       i32 `json:"tileGridSize"`,
+    tags_source_enum_uid: Maybe(int) `json:"tagsSourceEnumUid"`,
+    tile_grid_size:       int `json:"tileGridSize"`,
     // Unique Intidentifier
-    uid:                  i32 `json:"uid"`,
+    uid:                  int `json:"uid"`,
 }
 
 // In a tileset definition, user defined meta-data of a tile.
 Tile_Custom_Metadata :: struct {
     data:    string `json:"data"`,
-    tile_id: i32 `json:"tileId"`,
+    tile_id: int `json:"tileId"`,
 }
 
 // In a tileset definition, enum based tag infos
 Enum_Tag_Value :: struct {
     enum_value_id: string `json:"enumValueId"`,
-    tile_ids:      []i32 `json:"tileIds"`,
+    tile_ids:      []int `json:"tileIds"`,
 }
 
 Entity_Instance :: struct {
     // Grid-based coordinates (`[x,y]` format)
-    grid:            [2]i32 `json:"__grid"`,
+    grid:            [2]int `json:"__grid"`,
     // Entity definition identifier
     identifier:      string `json:"__identifier"`,
     // Pivot coordinates  (`[x,y]` format, values are from 0 to 1) of the Entity
@@ -490,20 +490,20 @@ Entity_Instance :: struct {
     // tile, or some tile provided by a field value, like an Enum).
     tile:            Maybe(Tileset_Rectangle) `json:"__tile"`,
     // Reference of the **Entity definition** UID
-    def_uid:         i32 `json:"defUid"`,
+    def_uid:         int `json:"defUid"`,
     // An array of all custom fields and their values.
     field_instances: []Field_Instance `json:"fieldInstances"`,
     // Entity height in pixels. For non-resizable entities, it will be the same as Entity
     // definition.
-    height:          i32 `json:"height"`,
+    height:          int `json:"height"`,
     // Unique instance identifier
     iid:             string `json:"iid"`,
     // Pixel coordinates (`[x,y]` format) in current level coordinate space. Don't forget
     // optional layer offsets, if they exist!
-    px:              [2]i32 `json:"px"`,
+    px:              [2]int `json:"px"`,
     // Entity width in pixels. For non-resizable entities, it will be the same as Entity
     // definition.
-    width:           i32 `json:"width"`,
+    width:           int `json:"width"`,
 }
 
 Field_Instance :: struct {
@@ -527,7 +527,7 @@ Field_Instance :: struct {
     // array, then this `__value` will also be a JSON array.
     value:      json.Value `json:"__value"`,
     // Reference of the **Field definition** UID
-    def_uid:    i32 `json:"defUid"`,
+    def_uid:    int `json:"defUid"`,
     // Editor internal raw values
     // realEditorValues: []Maybe(any),
 }
@@ -547,37 +547,37 @@ Entity_Reference_Infos :: struct {
 // This object is just a grid-based coordinate used in Field values.
 Grid_Point :: struct {
     // X grid-based coordinate
-    cx: i32 `json:"cx"`,
+    cx: int `json:"cx"`,
     // Y grid-based coordinate
-    cy: i32 `json:"cy"`,
+    cy: int `json:"cy"`,
 }
 
 // IntGrid value instance
 Int_Grid_Value_Instance :: struct {
     // Coordinate ID in the layer grid
-    coord_id: i32 `json:"coordId"`,
+    coord_id: int `json:"coordId"`,
     // IntGrid value
-    v:        i32 `json:"v"`,
+    v:        int `json:"v"`,
 }
 
 
 Layer_Instance :: struct {
     // Grid-based height
-    c_height:             i32 `json:"__cHei"`,
+    c_height:             int `json:"__cHei"`,
     // Grid-based width
-    c_width:              i32 `json:"__cWid"`,
+    c_width:              int `json:"__cWid"`,
     // Grid size
-    grid_size:            i32 `json:"__gridSize"`,
+    grid_size:            int `json:"__gridSize"`,
     // Layer definition identifier
     identifier:           string `json:"__identifier"`,
     // Layer opacity as Float [0-1]
     opacity:              f32 `json:"__opacity"`,
     // Total layer X pixel offset, including both instance and definition offsets.
-    px_total_offset_x:    i32 `json:"__pxTotalOffsetX"`,
+    px_total_offset_x:    int `json:"__pxTotalOffsetX"`,
     // Total layer Y pixel offset, including both instance and definition offsets.
-    px_total_offset_y:    i32 `json:"__pxTotalOffsetY"`,
+    px_total_offset_y:    int `json:"__pxTotalOffsetY"`,
     // The definition UID of corresponding Tileset, if any.
-    tileset_def_uid:      Maybe(i32) `json:"__tilesetDefUid"`,
+    tileset_def_uid:      Maybe(int) `json:"__tilesetDefUid"`,
     // The relative path to corresponding Tileset, if any.
     tileset_rel_path:     Maybe(string) `json:"__tilesetRelPath"`,
     // Layer type (possible values: IntGrid, Entities, Tiles or AutoLayer)
@@ -593,31 +593,31 @@ Layer_Instance :: struct {
     iid:                  string `json:"iid"`,
     // **WARNING**: this deprecated value is no longer exported since version 1.0.0  Replaced
     // by: `intGridCsv`
-    int_grid:             Maybe([]Int_Grid_Value_Instance) `json:"intGrid"`,
+    int_grid:             []Int_Grid_Value_Instance `json:"intGrid"`,
     // A list of all values in the IntGrid layer, stored in CSV format (Comma Separated
     // Values).  Order is from left to right, and top to bottom (ie. first row from left to
     // right, followed by second row, etc).  `0` means "empty cell" and IntGrid values
     // start at 1.  The array size is `__cWid` x `__cHei` cells.
-    int_grid_csv:         []i32 `json:"intGridCsv"`,
+    int_grid_csv:         []int `json:"intGridCsv"`,
     // Reference the Layer definition UID
-    layer_def_uid:        i32 `json:"layerDefUid"`,
+    layer_def_uid:        int `json:"layerDefUid"`,
     // Reference to the UID of the level containing this layer instance
-    level_id:             i32 `json:"levelId"`,
+    level_id:             int `json:"levelId"`,
     // An Array containing the UIDs of optional rules that were enabled in this specific layer
     // instance.
-    optional_rules:       []i32 `json:"optionalRules"`,
+    optional_rules:       []int `json:"optionalRules"`,
     // This layer can use another tileset by overriding the tileset UID here.
-    override_tileset_uid: Maybe(i32) `json:"overrideTilesetUid"`,
+    override_tileset_uid: Maybe(int) `json:"overrideTilesetUid"`,
     // X offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
     // the `LayerDef` optional offset, so you should probably prefer using `__pxTotalOffsetX`
     // which contains the total offset value)
-    px_offset_x:          i32 `json:"pxOffsetX"`,
+    px_offset_x:          int `json:"pxOffsetX"`,
     // Y offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
     // the `LayerDef` optional offset, so you should probably prefer using `__pxTotalOffsetX`
     // which contains the total offset value)
-    px_offset_y:          i32 `json:"pxOffsetY"`,
+    px_offset_y:          int `json:"pxOffsetY"`,
     // Random seed used for Auto-Layers rendering
-    seed:                 i32 `json:"seed"`,
+    seed:                 int `json:"seed"`,
     // Layer instance visibility
     visible:              bool `json:"visible"`,
 }
@@ -626,18 +626,18 @@ Layer_Instance :: struct {
 Tile_Instance :: struct {
     // Internal data used by the editor.  For auto-layer tiles: `[ruleId, coordId]`.
     // For tile-layer tiles: `[coordId]`.
-    d:   [2]i32 `json:"d"`,
+    d:   [2]int `json:"d"`,
     // "Flip bits", a 2-bits integer to represent the mirror transformations of the tile.
     // - Bit 0 = X flip   - Bit 1 = Y flip   Examples: f=0 (no flip), f=1 (X flip
     // only), f=2 (Y flip only), f=3 (both flips)
-    f:   i32 `json:"f"`,
+    f:   int `json:"f"`,
     // Pixel coordinates of the tile in the **layer** (`[x,y]` format). Don't forget optional
     // layer offsets, if they exist!
-    px:  [2]i32 `json:"px"`,
+    px:  [2]int `json:"px"`,
     // Pixel coordinates of the tile in the **tileset** (`[x,y]` format)
-    src: [2]i32 `json:"src"`,
+    src: [2]int `json:"src"`,
     // The *Tile ID* in the corresponding tileset.
-    t:   i32 `json:"t"`,
+    t:   int `json:"t"`,
 }
 
 // Level background image position info
@@ -651,7 +651,7 @@ Level_Background_Position :: struct {
     scale:       [2]f32 `json:"scale"`,
     // An array containing the `[x,y]` pixel coordinates of the top-left corner of the
     // **cropped** background image, depending on `bgPos` option.
-    top_left_px: [2]i32 `json:"topLeftPx"`,
+    top_left_px: [2]int `json:"topLeftPx"`,
 }
 
 // Nearby level info
@@ -664,7 +664,7 @@ Neighbour_Level :: struct {
     level_iid: string `json:"levelIid"`,
     // **WARNING**: this deprecated value is no longer exported since version 1.2.0  Replaced
     // by: `levelIid`
-    level_uid: Maybe(i32) `json:"levelUid"`,
+    level_uid: Maybe(int) `json:"levelUid"`,
 }
 
 
@@ -684,15 +684,15 @@ Field_Definition :: struct {
     type_string:            string `json:"__type"`,
     // Optional list of accepted file extensions for FilePath value type. Includes the dot:
     // `.ext`
-    accept_file_types:      Maybe([]string) `json:"acceptFileTypes"`,
+    accept_file_types:      []string `json:"acceptFileTypes"`,
     // Possible values: `Any`, `OnlySame`, `OnlyTags`
     allowed_refs:           Allowed_Refs `json:"allowedRefs"`,
     allowed_ref_tags:       []string `json:"allowedRefTags"`,
     allow_out_of_level_ref: bool `json:"allowOutOfLevelRef"`,
     // Array max length
-    array_max_length:       Maybe(i32) `json:"arrayMaxLength"`,
+    array_max_length:       Maybe(int) `json:"arrayMaxLength"`,
     // Array min length
-    array_min_length:       Maybe(i32) `json:"arrayMinLength"`,
+    array_min_length:       Maybe(int) `json:"arrayMinLength"`,
     auto_chain_ref:         bool `json:"autoChainRef"`,
     // TRUE if the value can be nil. For arrays, TRUE means it can contain nil values
     // (exception: array of Points can't have nil values).
@@ -732,13 +732,13 @@ Field_Definition :: struct {
     // `LangHaxe`, `LangMarkdown`, `LangJson`, `LangXml`, `LangLog`
     text_language_mode:     Maybe(Text_Language_Mode) `json:"textLanguageMode"`,
     // UID of the tileset used for a Tile
-    tileset_uid:            Maybe(i32) `json:"tilesetUid"`,
+    tileset_uid:            Maybe(int) `json:"tilesetUid"`,
     // Internal enum representing the possible field types. Possible values: F_Int, F_Float,
     // F_string, F_Text, F_Bool, F_Color, F_Enum(...), F_Point, F_Path, F_EntityRef, F_Tile
     // TODO
     type:                   string `json:"type"`,
     // Unique Int identifier
-    uid:                    i32 `json:"uid"`,
+    uid:                    int `json:"uid"`,
     // If TRUE, the color associated with this field will override the Entity or Level default
     // color in the editor UI. For Enum fields, this would be the color associated to their
     // values.
@@ -748,15 +748,15 @@ Field_Definition :: struct {
 // This object represents a custom sub rectangle in a Tileset image.
 Tileset_Rectangle :: struct {
     // Height in pixels
-    h:           i32 `json:"h"`,
+    h:           int `json:"h"`,
     // UID of the tileset
-    tileset_uid: i32 `json:"tilesetUid"`,
+    tileset_uid: int `json:"tilesetUid"`,
     // Width in pixels
-    w:           i32 `json:"w"`,
+    w:           int `json:"w"`,
     // X pixels coordinate of the top-left corner in the Tileset image
-    x:           i32 `json:"x"`,
+    x:           int `json:"x"`,
     // Y pixels coordinate of the top-left corner in the Tileset image
-    y:           i32 `json:"y"`,
+    y:           int `json:"y"`,
 }
 
 
@@ -765,13 +765,13 @@ Enum_Definition :: struct {
     // Relative path to the external file providing this Enum
     external_rel_path:      Maybe(string) `json:"externalRelPath"`,
     // Tileset UID if provided
-    icon_tileset_uid:       Maybe(i32) `json:"iconTilesetUid"`,
+    icon_tileset_uid:       Maybe(int) `json:"iconTilesetUid"`,
     // User defined unique identifier
     identifier:             string `json:"identifier"`,
     // An array of user-defined tags to organize the Enums
     tags:                   []string `json:"tags"`,
     // Unique Int identifier
-    uid:                    i32 `json:"uid"`,
+    uid:                    int `json:"uid"`,
     // All possible enum values, with their optional Tile infos.
     values:                 []Enum_Value_Definition `json:"values"`,
 }
@@ -779,13 +779,13 @@ Enum_Definition :: struct {
 Enum_Value_Definition :: struct {
     // An array of 4 Int values that refers to the tile in the tileset image: `[ x, y, width,
     // height ]`
-    tile_src_rect: Maybe([4]i32) `json:"__tileSrcRect"`,
+    tile_src_rect: Maybe([4]int) `json:"__tileSrcRect"`,
     // Optional color
-    color:         i32 `json:"color"`,
+    color:         int `json:"color"`,
     // Enum value
     id:            string `json:"id"`,
     // The optional ID of the tile
-    tile_id:       Maybe(i32) `json:"tileId"`,
+    tile_id:       Maybe(int) `json:"tileId"`,
 }
 
 Custom_Command :: struct {
@@ -956,9 +956,9 @@ Layer_Type :: enum {
 // own layout settings.
 World :: struct {
     // Default new level height
-    default_level_height: i32 `json:"defaultLevelHeight"`,
+    default_level_height: int `json:"defaultLevelHeight"`,
     // Default new level width
-    default_level_width:  i32 `json:"defaultLevelWidth"`,
+    default_level_width:  int `json:"defaultLevelWidth"`,
     // User defined unique identifier
     identifier:           string `json:"identifier"`,
     // Unique instance identifer
@@ -968,9 +968,9 @@ World :: struct {
     // Otherwise, you should refer to the `worldX`,`worldY` coordinates of each Level.
     levels:               []Level `json:"levels"`,
     // Height of the world grid in pixels.
-    world_grid_height:    i32 `json:"worldGridHeight"`,
+    world_grid_height:    int `json:"worldGridHeight"`,
     // Width of the world grid in pixels.
-    world_grid_width:     i32 `json:"worldGridWidth"`,
+    world_grid_width:     int `json:"worldGridWidth"`,
     // An enum that describes how levels are organized in this project (ie. linearly or in a 2D
     // space). Possible values: `Free`, `GridVania`, `LinearHorizontal`, `LinearVertical`, `nil`
     world_layout:         Maybe(World_Layout) `json:"worldLayout"`,
