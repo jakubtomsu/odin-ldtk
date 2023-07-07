@@ -15,7 +15,22 @@ import "ldtk"
 And then:
 ```odin
 if project, ok := ldtk.load_from_file("foo.ldtk", context.temp_allocator).?; ok {
-    // use project ...
+    for biome in project.defs.biomes {
+        // use biomes ...
+    }
+
+    for level in proj.levels {
+        for layer in level.layers {
+            switch layer.type {
+            case .IntGrid:
+            case .Entities:
+            case .Tiles:
+            case .AutoLayer:
+            }
+        }
+    }
+
+    // ...
 }
 ```
 Note: `value` in `Field_Instance` can be a different type depending on the data.
