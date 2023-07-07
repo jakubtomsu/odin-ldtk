@@ -37,5 +37,8 @@ if project, ok := ldtk.load_from_file("foo.ldtk", context.temp_allocator).?; ok 
 Note: `value` in `Field_Instance` can be a different type depending on the data.
 For this reason the type is `json.Value`, which works like `any` in this case, and you can do whatever you want with it.
 
+## TODO
+- Simple example tilemap renderer (and simple physics?), using raylib.
+
 ## Contributing
 Contributions are welcome!
