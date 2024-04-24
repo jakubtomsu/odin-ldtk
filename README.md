@@ -37,8 +37,14 @@ if project, ok := ldtk.load_from_file("foo.ldtk", context.temp_allocator).?; ok 
 Note: `value` in `Field_Instance` can be a different type depending on the data.
 For this reason the type is `json.Value`, which works like `any` in this case, and you can do whatever you want with it.
 
-## TODO
-- Simple example tilemap renderer (and simple physics?), using raylib.
+## Example
+There is an example of a basic 2d platformer in the [example](example/) folder. It uses raylib for the tilemap rendering. The initial implementation is by @Smilex.
+
+Hot to use:
+```
+cd example
+odin run .
+```
 
 ## Contributing
 Contributions are welcome!
