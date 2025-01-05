@@ -75,7 +75,7 @@ main :: proc() {
 
     if project, ok := ldtk.load_from_file("foo.ldtk", context.temp_allocator).?; ok {
         for level in project.levels {
-            for layer in level.layer_instances {
+            for layer in level.layer_instances.? {
                 switch layer.type {
                 case .IntGrid:
                     tile_columns = layer.c_width
