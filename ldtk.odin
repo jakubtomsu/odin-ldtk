@@ -32,7 +32,7 @@ Project :: struct {
     // If TRUE, an extra copy of the project will be created in a sub folder, when saving.
     backup_on_save:         bool `json:"backupOnSave"`,
     // Target relative path to store backup files
-    backup_rel_path:        Maybe(string) `json:"backupRelPath"`,
+    backup_rel_path:        string `json:"backupRelPath"`,
     // Project background color
     bg_color:               string `json:"bgColor"`,
     // An array of command lines that can be ran manually by the user
@@ -99,7 +99,7 @@ Project :: struct {
     // Next Unique integer ID available
     next_uid:               int `json:"nextUid"`,
     // File naming pattern for exported PNGs
-    png_file_pattern:       Maybe(string) `json:"pngFilePattern"`,
+    png_file_pattern:       string `json:"pngFilePattern"`,
     // If TRUE, a very simplified will be generated on saving, for quicker & easier engine
     // integration.
     simplified_export:      bool `json:"simplifiedExport"`,
@@ -108,7 +108,7 @@ Project :: struct {
     toc:                    []Table_Of_Content_Entry `json:"toc"`,
     // This optional description is used by LDtk Samples to show up some informations and
     // instructions.
-    tutorial_desc:          Maybe(string) `json:"tutorialDesc"`,
+    tutorial_desc:          string `json:"tutorialDesc"`,
     // **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
     // It will then be `nil`. You can enable the Multi-worlds advanced project option to enable
     // the change immediately.  Height of the world grid in pixels.
@@ -167,10 +167,10 @@ Level :: struct {
     // `Contain`, `Cover`, `CoverDirty`, `Repeat`
     bg_pos_type:         Maybe(Bg_Pos) `json:"bgPos"`,
     // The *optional* relative path to the level background image.
-    bg_rel_path:         Maybe(string) `json:"bgRelPath"`,
+    bg_rel_path:         string `json:"bgRelPath"`,
     // This value is not nil if the project option "*Save levels separately*" is enabled. In
     // this case, this **relative** path points to the level Json file.
-    external_rel_path:   Maybe(string) `json:"externalRelPath"`,
+    external_rel_path:   string `json:"externalRelPath"`,
     // An array containing this level custom field values.
     field_instances:     []Field_Instance `json:"fieldInstances"`,
     // User defined unique identifier
@@ -236,7 +236,7 @@ Entity_Definition :: struct {
     // Base entity color
     color:               string `json:"color"`,
     // User defined documentation for this element to provide help/tips to level designers.
-    doc:                 Maybe(string) `json:"doc"`,
+    doc:                 string `json:"doc"`,
     // If enabled, all instances of this entity will be listed in the project "Table of content"
     // object.
     export_to_toc:       bool `json:"exportToToc"`,
@@ -322,7 +322,7 @@ Layer_Definition :: struct {
     // Opacity of the layer (0 to 1.0)
     display_opacity:                      f32 `json:"displayOpacity"`,
     // User defined documentation for this element to provide help/tips to level designers.
-    doc:                                  Maybe(string) `json:"doc"`,
+    doc:                                  string `json:"doc"`,
     // An array of tags to forbid some Entities in this layer
     excluded_tags:                        []string `json:"excludedTags"`,
     // Width and height of the grid in pixels
@@ -378,7 +378,7 @@ Layer_Definition :: struct {
     // `AutoLayer`
     layer_type:                           Type `json:"type"`,
     // User defined color for the UI
-    ui_color:                             Maybe(string) `json:"uiColor"`,
+    ui_color:                             string `json:"uiColor"`,
     // Unique Int identifier
     uid:                                  int `json:"uid"`,
     // Display tags
@@ -393,7 +393,7 @@ Auto_Layer_Rule_Group :: struct {
     biome_requirement_mode: int `json:"biomeRequirementMode"`,
     // *This field was removed in 1.0.0 and should no longer be used.*
     collapsed:              Maybe(bool) `json:"collapsed"`,
-    color:                  Maybe(string) `json:"color"`,
+    color:                  string `json:"color"`,
     icon:                   Maybe(Tileset_Rectangle) `json:"icon"`,
     is_optional:            bool `json:"isOptional"`,
     name:                   string `json:"name"`,
@@ -472,7 +472,7 @@ Int_Grid_Value_Definition :: struct {
     // Parent group identifier (0 if none)
     group_uid:  int `json:"groupUid"`,
     // User defined unique identifier
-    identifier: Maybe(string) `json:"identifier"`,
+    identifier: string `json:"identifier"`,
     tile:       Maybe(Tileset_Rectangle) `json:"__tile"`,
     // The IntGrid value itself
     value:      int `json:"value"`,
@@ -481,9 +481,9 @@ Int_Grid_Value_Definition :: struct {
 
 Int_Grid_Value_Group_Definition :: struct {
     // User defined color
-    color:      Maybe(string) `json:"color"`,
+    color:      string `json:"color"`,
     // User defined string identifier
-    identifier: Maybe(string) `json:"identifier"`,
+    identifier: string `json:"identifier"`,
     // Group unique ID
     uid:        int `json:"uid"`,
 }
@@ -518,7 +518,7 @@ Tileset_Definition :: struct {
     px_width:             int `json:"pxWid"`,
     // Path to the source file, relative to the current project JSON file  It can be nil
     // if no image was provided, or when using an embed atlas.
-    rel_path:             Maybe(string) `json:"relPath"`,
+    rel_path:             string `json:"relPath"`,
     // Array of group of tiles selections, only meant to be used in the editor
     saved_selections:     []map[string]Maybe(json.Value) `json:"savedSelections"`,
     // Space in pixels between all tiles
@@ -657,7 +657,7 @@ Layer_Instance :: struct {
     // The definition UID of corresponding Tileset, if any.
     tileset_def_uid:      Maybe(int) `json:"__tilesetDefUid"`,
     // The relative path to corresponding Tileset, if any.
-    tileset_rel_path:     Maybe(string) `json:"__tilesetRelPath"`,
+    tileset_rel_path:     string `json:"__tilesetRelPath"`,
     // Layer type (possible values: IntGrid, Entities, Tiles or AutoLayer)
     type:                 Type `json:"__type"`,
     // An array containing all tiles generated by Auto-layer rules. The array is already sorted
@@ -786,10 +786,10 @@ Field_Definition :: struct {
     default_override:        Maybe(json.Value) `json:"defaultOverride"`,
     // User defined documentation for this field to provide help/tips to level designers about
     // accepted values.
-    doc:                     Maybe(string) `json:"doc"`,
+    doc:                     string `json:"doc"`,
     editor_always_show:      bool `json:"editorAlwaysShow"`,
     editor_cut_long_values:  bool `json:"editorCutLongValues"`,
-    editor_display_color:    Maybe(string) `json:"editorDisplayColor"`,
+    editor_display_color:    string `json:"editorDisplayColor"`,
     // Possible values: `Hidden`, `ValueOnly`, `NameAndValue`, `EntityTile`, `LevelTile`,
     // `Points`, `PointStar`, `PointPath`, `PointPathLoop`, `RadiusPx`, `RadiusGrid`,
     // `ArrayCountWithLabel`, `ArrayCountNoLabel`, `RefLinkBetweenPivots`,
@@ -801,8 +801,8 @@ Field_Definition :: struct {
     // Possible values: `ZigZag`, `StraightArrow`, `CurvedArrow`, `ArrowsLine`, `DashedLine`
     editor_link_style:       Editor_Link_Style `json:"editorLinkStyle"`,
     editor_show_in_world:    bool `json:"editorShowInWorld"`,
-    editor_text_prefix:      Maybe(string) `json:"editorTextPrefix"`,
-    editor_text_suffix:      Maybe(string) `json:"editorTextSuffix"`,
+    editor_text_prefix:      string `json:"editorTextPrefix"`,
+    editor_text_suffix:      string `json:"editorTextSuffix"`,
     // If TRUE, the field value will be exported to the `toc` project JSON field. Only applies
     // to Entity fields.
     export_to_toc:           bool `json:"exportToToc"`,
@@ -816,7 +816,7 @@ Field_Definition :: struct {
     min:                     Maybe(f32) `json:"min"`,
     // Optional regular expression that needs to be matched to accept values. Expected format:
     // `/some_reg_ex/g`, with optional "i" flag.
-    regex:                   Maybe(string) `json:"regex"`,
+    regex:                   string `json:"regex"`,
     // If enabled, this field will be searchable through LDtk command palette
     searchable:              bool `json:"searchable"`,
     symmetrical_ref:         bool `json:"symmetricalRef"`,
@@ -863,9 +863,9 @@ Tileset_Rectangle :: struct {
 
 
 Enum_Definition :: struct {
-    external_file_checksum: Maybe(string) `json:"externalFileChecksum"`,
+    external_file_checksum: string `json:"externalFileChecksum"`,
     // Relative path to the external file providing this Enum
-    external_rel_path:      Maybe(string) `json:"externalRelPath"`,
+    external_rel_path:      string `json:"externalRelPath"`,
     // Tileset UID if provided
     icon_tileset_uid:       Maybe(int) `json:"iconTilesetUid"`,
     // User defined unique identifier
