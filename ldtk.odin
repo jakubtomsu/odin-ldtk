@@ -544,42 +544,6 @@ Enum_Tag_Value :: struct {
     tile_ids:      []int `json:"tileIds"`,
 }
 
-
-// This object is not actually used by LDtk. It ONLY exists to force explicit references to
-// all types, to make sure QuickType finds them and integrate all of them. Otherwise,
-// Quicktype will drop types that are not explicitely used.
-Forced_Refs :: struct {
-    auto_layer_rule_group:    Maybe(Auto_Layer_Rule_Group) `json:"autoLayerRuleGroup"`,
-    auto_rule_def:            Maybe(Auto_Layer_Rule_Definition) `json:"autoRuleDef"`,
-    custom_command:           Maybe(Custom_Command) `json:"customCommand"`,
-    definitions:              Maybe(Definitions) `json:"definitions"`,
-    entity_def:               Maybe(Entity_Definition) `json:"entityDef"`,
-    entity_instance:          Maybe(Entity_Instance) `json:"entityInstance"`,
-    entity_reference_infos:   Maybe(Reference_To_An_Entity_Instance) `json:"entityReferenceInfos"`,
-    enum_def:                 Maybe(Enum_Definition) `json:"enumDef"`,
-    enum_def_values:          Maybe(Enum_Value_Definition) `json:"enumDefValues"`,
-    enum_tag_value:           Maybe(Enum_Tag_Value) `json:"enumTagValue"`,
-    field_def:                Maybe(Field_Definition) `json:"fieldDef"`,
-    field_instance:           Maybe(Field_Instance) `json:"fieldInstance"`,
-    grid_point:               Maybe(Grid_Point) `json:"gridPoint"`,
-    int_grid_value_def:       Maybe(Int_Grid_Value_Definition) `json:"intGridValueDef"`,
-    int_grid_value_group_def: Maybe(Int_Grid_Value_Group_Definition) `json:"intGridValueGroupDef"`,
-    int_grid_value_instance:  Maybe(Int_Grid_Value_Instance) `json:"intGridValueInstance"`,
-    layer_def:                Maybe(Layer_Definition) `json:"layerDef"`,
-    layer_instance:           Maybe(Layer_Instance) `json:"layerInstance"`,
-    level:                    Maybe(Level) `json:"level"`,
-    level_bg_pos_infos:       Maybe(Level_Background_Position) `json:"levelBgPosInfos"`,
-    neighbour_level:          Maybe(Neighbour_Level) `json:"neighbourLevel"`,
-    table_of_content_entry:   Maybe(Table_Of_Content_Entry) `json:"tableOfContentEntry"`,
-    tile:                     Maybe(Tile_Instance) `json:"tile"`,
-    tile_custom_metadata:     Maybe(Tile_Custom_Metadata) `json:"tileCustomMetadata"`,
-    tileset_def:              Maybe(Tileset_Definition) `json:"tilesetDef"`,
-    tileset_rect:             Maybe(Tileset_Rectangle) `json:"tilesetRect"`,
-    toc_instance_data:        Maybe(Toc_Instance_Data) `json:"tocInstanceData"`,
-    world:                    Maybe(World) `json:"world"`,
-}
-
-
 // This object describes the "location" of an Entity instance in the project worlds.
 //
 // IID information of this instance
