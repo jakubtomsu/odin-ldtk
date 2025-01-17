@@ -180,7 +180,7 @@ Level :: struct {
     // An array containing all Layer instances. **IMPORTANT**: if the project option "*Save
     // levels separately*" is enabled, this field will be `nil`.  This array is **sorted
     // in display order**: the 1st layer is the top-most and the last is behind.
-    layer_instances:     Maybe([]Layer_Instance) `json:"layerInstances"`,
+    layer_instances:     []Layer_Instance `json:"layerInstances"`,
     // Height of the level in pixels
     px_height:           int `json:"pxHei"`,
     // Width of the level in pixels
@@ -437,7 +437,7 @@ Auto_Layer_Rule_Definition :: struct {
     size:                int `json:"size"`,
     // **WARNING**: this deprecated value is no longer exported since version 1.5.0  Replaced
     // by: `tileRectsIds`
-    tile_ids:            Maybe([]int) `json:"tileIds"`,
+    tile_ids:            []int `json:"tileIds"`,
     // Defines how tileIds array is used Possible values: `Single`, `Stamp`
     tile_mode:           Tile_Mode `json:"tileMode"`,
     // Max random offset for X tile pos
@@ -671,7 +671,7 @@ Layer_Instance :: struct {
     iid:                  string `json:"iid"`,
     // **WARNING**: this deprecated value is no longer exported since version 1.0.0  Replaced
     // by: `intGridCsv`
-    int_grid:             Maybe([]Int_Grid_Value_Instance) `json:"intGrid"`,
+    int_grid:             []Int_Grid_Value_Instance `json:"intGrid"`,
     // A list of all values in the IntGrid layer, stored in CSV format (Comma Separated
     // Values).  Order is from left to right, and top to bottom (ie. first row from left to
     // right, followed by second row, etc).  `0` means "empty cell" and IntGrid values
@@ -754,7 +754,7 @@ Table_Of_Content_Entry :: struct {
     identifier:     string `json:"identifier"`,
     // **WARNING**: this deprecated value will be *removed* completely on version 1.7.0+
     // Replaced by: `instancesData`
-    instances:      Maybe([]Reference_To_An_Entity_Instance) `json:"instances"`,
+    instances:      []Reference_To_An_Entity_Instance `json:"instances"`,
     instances_data: []Toc_Instance_Data `json:"instancesData"`,
 }
 
@@ -768,7 +768,7 @@ Field_Definition :: struct {
     type_string:             string `json:"__type"`,
     // Optional list of accepted file extensions for FilePath value type. Includes the dot:
     // `.ext`
-    accept_file_types:       Maybe([]string) `json:"acceptFileTypes"`,
+    accept_file_types:       []string `json:"acceptFileTypes"`,
     // Possible values: `Any`, `OnlySame`, `OnlyTags`, `OnlySpecificEntity`
     allowed_refs:            Allowed_Refs `json:"allowedRefs"`,
     allowed_refs_entity_uid: Maybe(int) `json:"allowedRefsEntityUid"`,
