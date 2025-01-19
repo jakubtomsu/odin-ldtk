@@ -4,7 +4,7 @@ Loader for [LDtk](https://ldtk.io/) files. Uses Odin's `core:json` to unmarshal 
 > LDtk is a modern 2D level editor from the creator of Dead Cells,
 with a strong focus on user-friendliness.
 
-Current version: `1.3.3`
+Current version: `1.5.3`
 
 The data definitions were generated with [JSON scheme and QuickType](https://ldtk.io/docs/game-dev/loading/?menu=1#2-the-quicktype-way) for rust and then manually edited.
 
